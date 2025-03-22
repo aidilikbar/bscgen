@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PerspectiveController;
 use App\Http\Controllers\ObjectiveController;
 use App\Http\Controllers\KPIController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('perspectives', PerspectiveController::class);
     Route::resource('objectives', ObjectiveController::class);
     Route::resource('kpis', KPIController::class);
+    Route::resource('employees', EmployeeController::class);
 });
 
 require __DIR__.'/auth.php';
