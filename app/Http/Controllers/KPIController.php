@@ -10,7 +10,7 @@ class KPIController extends Controller
 {
     public function index()
     {
-        $kpis = KPI::with('perspective')->get();
+        $kpis = KPI::with('perspective')->paginate(10);
         return view('kpis.index', compact('kpis'));
     }
 

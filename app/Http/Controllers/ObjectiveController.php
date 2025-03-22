@@ -11,7 +11,7 @@ class ObjectiveController extends Controller
 
     public function index()
     {
-        $objectives = Objective::with('perspective')->get();
+        $objectives = Objective::with('perspective')->paginate(10);
         return view('objectives.index', compact('objectives'));
     }
 

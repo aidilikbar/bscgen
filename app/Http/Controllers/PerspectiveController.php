@@ -10,7 +10,7 @@ class PerspectiveController extends Controller
  
     public function index()
     {
-        $perspectives = Perspective::all();
+        $perspectives = Perspective::paginate(10); // Add pagination
         return view('perspectives.index', compact('perspectives'));
     }
 

@@ -5,41 +5,45 @@
         </h2>
     </x-slot>
 
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <a href="{{ route('perspectives.create') }}" class="btn btn-primary mb-4">+ Create New</a>
+    <div class="py-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <a href="{{ route('perspectives.create') }}" class="mb-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            + Create New
+        </a>
 
-            @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
+        @if (session('success'))
+            <div class="mb-4 text-green-600 font-medium">
+                {{ session('success') }}
+            </div>
+        @endif
 
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <table class="table table-bordered w-full">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th class="text-right">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($perspectives as $perspective)
-                                <tr>
-                                    <td>{{ $perspective->id }}</td>
-                                    <td>{{ $perspective->name }}</td>
-                                    <td class="text-right">
-                                        <a href="{{ route('perspectives.edit', $perspective) }}" class="btn btn-sm btn-warning">Edit</a>
-                                        <form action="{{ route('perspectives.destroy', $perspective) }}" method="POST" class="inline-block">
-                                            @csrf @method('DELETE')
-                                            <button onclick="return confirm('Delete this perspective?')" class="btn btn-sm btn-danger">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <table class="min-w-full table-auto">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">ID</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Name</th>
+                        <th class="px-6 py-3 text-right text-sm font-medium text-gray-700">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($perspectives as $perspective)
+                        <tr class="border-t">
+                            <td class="px-6 py-4">{{ $perspective->id }}</td>
+                            <td class="px-6 py-4">{{ $perspective->name }}</td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="{{ route('perspectives.edit', $perspective) }}" class="text-yellow-600 hover:underline mr-2">Edit</a>
+                                <form action="{{ route('perspectives.destroy', $perspective) }}" method="POST" class="inline-block">
+                                    @csrf @method('DELETE')
+                                    <button onclick="return confirm('Are you sure?')" class="text-red-600 hover:underline">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+            <div class="p-4">
+                {{ $perspectives->links() }}
             </div>
         </div>
     </div>
