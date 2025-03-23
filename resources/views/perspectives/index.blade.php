@@ -30,7 +30,8 @@
                         <tr class="border-t">
                             <td class="px-6 py-4">{{ $perspective->id }}</td>
                             <td class="px-6 py-4">{{ $perspective->name }}</td>
-                            <td class="px-6 py-4 text-right">
+                            <td class="px-6 py-4 text-right space-x-2">
+                                <a href="{{ route('perspectives.show', $perspective) }}" class="text-blue-600 hover:underline">View</a>
                                 <a href="{{ route('perspectives.edit', $perspective) }}" class="text-yellow-600 hover:underline mr-2">Edit</a>
                                 <form action="{{ route('perspectives.destroy', $perspective) }}" method="POST" class="inline-block">
                                     @csrf @method('DELETE')

@@ -32,7 +32,8 @@
                             <td class="px-6 py-4">{{ $kpi->id }}</td>
                             <td class="px-6 py-4">{{ $kpi->perspective->name ?? '-' }}</td>
                             <td class="px-6 py-4">{{ $kpi->description }}</td>
-                            <td class="px-6 py-4 text-right">
+                            <td class="px-6 py-4 text-right space-x-2">
+                                <a href="{{ route('kpis.show', $kpi) }}" class="text-blue-600 hover:underline">View</a>
                                 <a href="{{ route('kpis.edit', $kpi) }}" class="text-yellow-600 hover:underline mr-2">Edit</a>
                                 <form action="{{ route('kpis.destroy', $kpi) }}" method="POST" class="inline-block">
                                     @csrf @method('DELETE')

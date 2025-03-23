@@ -34,7 +34,8 @@
                             <td class="px-6 py-4">{{ $employee->position_title }}</td>
                             <td class="px-6 py-4">{{ $employee->business_unit }}</td>
                             <td class="px-6 py-4">{{ $employee->supervisor?->name ?? '-' }}</td>
-                            <td class="px-6 py-4 text-right">
+                            <td class="px-6 py-4 text-right space-x-2">
+                                <a href="{{ route('employees.show', $employee) }}" class="text-blue-600 hover:underline">View</a>
                                 <a href="{{ route('employees.edit', $employee) }}" class="text-yellow-600 hover:underline mr-2">Edit</a>
                                 <form action="{{ route('employees.destroy', $employee) }}" method="POST" class="inline-block">
                                     @csrf @method('DELETE')
