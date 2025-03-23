@@ -26,8 +26,9 @@
                         <tr class="border-t">
                             <td class="px-6 py-4">{{ $scorecard->employee->name }}</td>
                             <td class="px-6 py-4">{{ $scorecard->year }}</td>
-                            <td class="px-6 py-4 text-right">
-                                <a href="{{ route('scorecards.edit', $scorecard) }}" class="text-yellow-600 hover:underline mr-2">Edit</a>
+                            <td class="px-6 py-4 text-right space-x-2">
+                                <a href="{{ route('scorecards.show', $scorecard) }}" class="text-blue-600 hover:underline">View</a>
+                                <a href="{{ route('scorecards.edit', $scorecard) }}" class="text-yellow-600 hover:underline">Edit</a>
                                 <form action="{{ route('scorecards.destroy', $scorecard) }}" method="POST" class="inline-block">
                                     @csrf @method('DELETE')
                                     <button class="text-red-600 hover:underline" onclick="return confirm('Delete this scorecard?')">Delete</button>
