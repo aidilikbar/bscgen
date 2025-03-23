@@ -6,6 +6,7 @@ use App\Http\Controllers\ObjectiveController;
 use App\Http\Controllers\KPIController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ScorecardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('objectives', ObjectiveController::class);
     Route::resource('kpis', KPIController::class);
     Route::resource('employees', EmployeeController::class);
+    Route::resource('scorecards', ScorecardController::class);
 });
 
 require __DIR__.'/auth.php';
