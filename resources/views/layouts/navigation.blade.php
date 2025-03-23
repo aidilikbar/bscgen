@@ -7,7 +7,6 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <img src="{{ asset('images/bscgen-logo.png') }}" alt="BSCGen Logo" class="w-8 h-8">
-                        <span class="text-lg font-semibold text-gray-800">BSCGen</span>
                     </a>
                 </div>
 
