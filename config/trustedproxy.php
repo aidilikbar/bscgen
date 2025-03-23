@@ -2,25 +2,13 @@
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Trusted Proxy IP Addresses
-    |--------------------------------------------------------------------------
-    |
-    | Use '*' to trust all proxies or an array of proxy IP addresses.
-    |
-    */
+    'proxies' => '*', // Trust all proxies
 
-    'proxies' => '*',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Headers to Trust
-    |--------------------------------------------------------------------------
-    |
-    | These headers are used to detect proxies and forwarded requests.
-    |
-    */
-
-    'headers' => Illuminate\Http\Request::HEADER_X_FORWARDED_ALL,
+    'headers' => [
+        'FORWARDED' => null,
+        'X_FORWARDED_FOR' => 'X_FORWARDED_FOR',
+        'X_FORWARDED_HOST' => 'X_FORWARDED_HOST',
+        'X_FORWARDED_PORT' => 'X_FORWARDED_PORT',
+        'X_FORWARDED_PROTO' => 'X_FORWARDED_PROTO',
+    ],
 ];
