@@ -17,6 +17,14 @@
         <!-- Treant.js Styles -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/treant-js/1.0/Treant.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/treant-js/1.0/vendor/perfect-scrollbar.min.css" />
+
+        <!-- Favicons -->
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/bscgen-logo.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/bscgen-logo.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/bscgen-logo.png') }}">
+        <link rel="manifest" href="{{ asset('images/bscgen-logo.png') }}">
+        <link rel="mask-icon" href="{{ asset('images/bscgen-logo.png') }}" color="#3490dc">
+        <meta name="theme-color" content="#3490dc">
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
