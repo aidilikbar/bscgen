@@ -8,9 +8,13 @@
     <div class="py-6">
         <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white p-6 shadow-sm rounded-lg">
+                <div class="mb-6 text-left">
+                    <a href="{{ route('perspectives.index') }}" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded ml-auto">
+                        ← Back to List
+                    </a>
+                </div>
                 <p><strong>ID:</strong> {{ $perspective->id }}</p>
-                <p><strong>Name:</strong> {{ $perspective->name }}</p>
-                <a href="{{ route('perspectives.index') }}" class="btn btn-secondary mt-4">Back</a>
+                <p><strong>Name:</strong> {{ $perspective->name }}</p>>
             </div>
         </div>
     </div>
