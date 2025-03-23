@@ -28,7 +28,7 @@
                     <label class="block font-medium text-sm mb-2">Scorecard Details</label>
                     <div id="details">
                         @foreach($scorecard->details as $i => $detail)
-                        <div class="grid grid-cols-6 gap-2 mb-2">
+                        <div class="grid grid-cols-7 gap-2 mb-2">
                             <select name="details[{{ $i }}][perspective_id]" class="form-select col-span-1" required>
                                 @foreach($perspectives as $persp)
                                     <option value="{{ $persp->id }}" {{ $persp->id == $detail->perspective_id ? 'selected' : '' }}>
@@ -53,9 +53,10 @@
                                 @endforeach
                             </select>
 
-                            <input name="details[{{ $i }}][target]" type="number" class="form-input col-span-1" value="{{ $detail->target }}">
-                            <input name="details[{{ $i }}][weight]" type="number" class="form-input col-span-1" value="{{ $detail->weight }}">
-                            <input name="details[{{ $i }}][realization]" type="number" class="form-input col-span-1" value="{{ $detail->realization }}">
+                            <input name="details[{{ $i }}][baseline]" type="number" value="{{ $detail->baseline }}" placeholder="Baseline" class="form-input col-span-1">
+                            <input name="details[{{ $i }}][target]" type="number" value="{{ $detail->target }}" placeholder="Target" class="form-input col-span-1">
+                            <input name="details[{{ $i }}][weight]" type="number" value="{{ $detail->weight }}" placeholder="Weight" class="form-input col-span-1">
+                            <input name="details[{{ $i }}][realization]" type="number" value="{{ $detail->realization }}" placeholder="Realization" class="form-input col-span-1">
                         </div>
                         @endforeach
                     </div>

@@ -31,6 +31,7 @@
                             <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Perspective</th>
                             <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Objective</th>
                             <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">KPI</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Baseline</th>
                             <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Target</th>
                             <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Weight</th>
                             <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Realization</th>
@@ -42,6 +43,7 @@
                                 <td class="px-4 py-2">{{ $detail->perspective->name }}</td>
                                 <td class="px-4 py-2">{{ $detail->objective->description }}</td>
                                 <td class="px-4 py-2">{{ $detail->kpi->description }}</td>
+                                <td class="px-4 py-2">{{ $detail->baseline }}</td>
                                 <td class="px-4 py-2">{{ $detail->target }}</td>
                                 <td class="px-4 py-2">{{ $detail->weight }}</td>
                                 <td class="px-4 py-2">{{ $detail->realization }}</td>

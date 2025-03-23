@@ -25,7 +25,7 @@
                 <div class="mb-6">
                     <label class="block font-medium text-sm mb-2">Scorecard Details</label>
                     <div id="details">
-                        <div class="grid grid-cols-6 gap-2 mb-2">
+                        <div class="grid grid-cols-7 gap-2 mb-2">
                             <select name="details[0][perspective_id]" class="form-select col-span-1" required>
                                 <option value="">Perspective</option>
                                 @foreach($perspectives as $persp)
@@ -47,6 +47,7 @@
                                 @endforeach
                             </select>
 
+                            <input name="details[0][baseline]" type="number" placeholder="Baseline" class="form-input col-span-1">
                             <input name="details[0][target]" type="number" placeholder="Target" class="form-input col-span-1">
                             <input name="details[0][weight]" type="number" placeholder="Weight" class="form-input col-span-1">
                             <input name="details[0][realization]" type="number" placeholder="Realization" class="form-input col-span-1">

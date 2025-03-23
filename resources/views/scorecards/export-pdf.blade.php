@@ -18,6 +18,7 @@
                 <th>Perspective</th>
                 <th>Objective</th>
                 <th>KPI</th>
+                <th>Baseline</th>
                 <th>Target</th>
                 <th>Weight</th>
                 <th>Realization</th>
@@ -29,6 +30,7 @@
                 <td>{{ $detail->perspective->name }}</td>
                 <td>{{ $detail->objective->description }}</td>
                 <td>{{ $detail->kpi->description }}</td>
+                <td>{{ $detail->baseline }}</td>
                 <td>{{ $detail->target }}</td>
                 <td>{{ $detail->weight }}</td>
                 <td>{{ $detail->realization }}</td>
