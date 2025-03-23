@@ -13,6 +13,14 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- Favicons -->
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/bscgen-logo.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/bscgen-logo.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/bscgen-logo.png') }}">
+        <link rel="manifest" href="{{ asset('images/bscgen-logo.png') }}">
+        <link rel="mask-icon" href="{{ asset('images/bscgen-logo.png') }}" color="#3490dc">
+        <meta name="theme-color" content="#3490dc">
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
