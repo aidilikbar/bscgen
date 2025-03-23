@@ -24,36 +24,56 @@
 
                 <div class="mb-6">
                     <label class="block font-medium text-sm mb-2">Scorecard Details</label>
-                    <div id="details">
-                        <div class="grid grid-cols-7 gap-2 mb-2">
-                            <select name="details[0][perspective_id]" class="form-select col-span-1" required>
-                                <option value="">Perspective</option>
-                                @foreach($perspectives as $persp)
-                                    <option value="{{ $persp->id }}">{{ $persp->name }}</option>
-                                @endforeach
-                            </select>
 
-                            <select name="details[0][objective_id]" class="form-select col-span-1" required>
-                                <option value="">Objective</option>
-                                @foreach($objectives as $obj)
-                                    <option value="{{ $obj->id }}">{{ $obj->description }}</option>
-                                @endforeach
-                            </select>
-
-                            <select name="details[0][kpi_id]" class="form-select col-span-1" required>
-                                <option value="">KPI</option>
-                                @foreach($kpis as $kpi)
-                                    <option value="{{ $kpi->id }}">{{ $kpi->description }}</option>
-                                @endforeach
-                            </select>
-
-                            <input name="details[0][baseline]" type="number" placeholder="Baseline" class="form-input col-span-1">
-                            <input name="details[0][target]" type="number" placeholder="Target" class="form-input col-span-1">
-                            <input name="details[0][weight]" type="number" placeholder="Weight" class="form-input col-span-1">
-                            <input name="details[0][realization]" type="number" placeholder="Realization" class="form-input col-span-1">
-                        </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm border border-gray-200" id="details-table">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="px-3 py-2 text-left">Perspective</th>
+                                    <th class="px-3 py-2 text-left">Objective</th>
+                                    <th class="px-3 py-2 text-left">KPI</th>
+                                    <th class="px-3 py-2 text-left">Baseline</th>
+                                    <th class="px-3 py-2 text-left">Target</th>
+                                    <th class="px-3 py-2 text-left">Weight</th>
+                                    <th class="px-3 py-2 text-left">Realization</th>
+                                </tr>
+                            </thead>
+                            <tbody id="details">
+                                <tr>
+                                    <td class="px-3 py-2">
+                                        <select name="details[0][perspective_id]" class="form-select w-full" required>
+                                            <option value="">--</option>
+                                            @foreach($perspectives as $persp)
+                                                <option value="{{ $persp->id }}">{{ $persp->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td class="px-3 py-2">
+                                        <select name="details[0][objective_id]" class="form-select w-full" required>
+                                            <option value="">--</option>
+                                            @foreach($objectives as $obj)
+                                                <option value="{{ $obj->id }}">{{ $obj->description }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td class="px-3 py-2">
+                                        <select name="details[0][kpi_id]" class="form-select w-full" required>
+                                            <option value="">--</option>
+                                            @foreach($kpis as $kpi)
+                                                <option value="{{ $kpi->id }}">{{ $kpi->description }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td class="px-3 py-2"><input name="details[0][baseline]" type="number" placeholder="e.g. 5" class="form-input w-full" /></td>
+                                    <td class="px-3 py-2"><input name="details[0][target]" type="number" placeholder="e.g. 10" class="form-input w-full" /></td>
+                                    <td class="px-3 py-2"><input name="details[0][weight]" type="number" placeholder="%" class="form-input w-full" /></td>
+                                    <td class="px-3 py-2"><input name="details[0][realization]" type="number" placeholder="%" class="form-input w-full" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <button type="button" onclick="addDetail()" class="mt-2 text-sm text-blue-600 hover:underline">+ Add More</button>
+
+                    <button type="button" onclick="addDetailRow()" class="mt-3 text-sm text-blue-600 hover:underline">+ Add More</button>
                 </div>
 
                 <div class="flex justify-end space-x-2">
@@ -67,17 +87,20 @@
     </div>
 
     <script>
-        let index = 1;
-        function addDetail() {
-            const details = document.getElementById('details');
-            const row = details.firstElementChild.cloneNode(true);
-            [...row.querySelectorAll('select, input')].forEach(input => {
-                const name = input.name.replace(/\[\d+\]/, `[${index}]`);
+        let detailIndex = 1;
+
+        function addDetailRow() {
+            const row = document.querySelector('#details tr').cloneNode(true);
+            const inputs = row.querySelectorAll('select, input');
+
+            inputs.forEach(input => {
+                const name = input.name.replace(/\[\d+\]/, `[${detailIndex}]`);
                 input.name = name;
                 input.value = '';
             });
-            details.appendChild(row);
-            index++;
+
+            document.querySelector('#details').appendChild(row);
+            detailIndex++;
         }
     </script>
 </x-app-layout>
