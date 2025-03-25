@@ -35,6 +35,10 @@
                     <x-nav-link :href="route('scorecards.index')" :active="request()->routeIs('scorecards.*')">
                         {{ __('Scorecards') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('positions.index')" :active="request()->routeIs('positions.*')">
+                        {{ __('Positions') }}
+                    </x-nav-link>
                 </div>
             </div>
 
