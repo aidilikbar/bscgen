@@ -8,6 +8,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ScorecardController;
 use App\Http\Controllers\ScorecardExportController;
+use App\Http\Controllers\PositionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('scorecards', ScorecardController::class);
     Route::get('/scorecards/{scorecard}/pdf', [ScorecardExportController::class, 'pdf'])->name('scorecards.export.pdf');
     Route::get('/scorecards/{scorecard}/excel', [ScorecardExportController::class, 'excel'])->name('scorecards.export.excel');
+    Route::resource('positions', PositionController::class);
 });
 
 require __DIR__.'/auth.php';
