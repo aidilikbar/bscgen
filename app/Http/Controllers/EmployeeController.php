@@ -3,65 +3,69 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Position;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::with('supervisor')->paginate(10);
+        $employees = Employee::with(['supervisor', 'position'])->paginate(10);
         return view('employees.index', compact('employees'));
     }
 
     public function create()
     {
         $supervisors = Employee::all();
-        return view('employees.create', compact('supervisors'));
+        $positions = Position::all();
+        return view('employees.create', compact('supervisors', 'positions'));
     }
+    
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'position_title' => 'required|string|max:255',
+            'position_id' => 'required|exists:positions,id',
             'business_unit' => 'required|string|max:255',
             'supervisor_id' => 'nullable|exists:employees,id',
         ]);
-
-        Employee::create($request->all());
-
+    
+        Employee::create($validated);
+    
         return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
     }
 
     public function show(Employee $employee)
     {
+        $employee->load(['supervisor', 'position']);
         return view('employees.show', compact('employee'));
     }
 
     public function edit(Employee $employee)
     {
-        $supervisors = Employee::where('id', '!=', $employee->id)->get(); // avoid self-loop
-        return view('employees.edit', compact('employee', 'supervisors'));
+        $supervisors = Employee::where('id', '!=', $employee->id)->get();
+        $positions = Position::all();
+        return view('employees.edit', compact('employee', 'supervisors', 'positions'));
     }
 
     public function update(Request $request, Employee $employee)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'position_title' => 'required|string|max:255',
+            'position_id' => 'required|exists:positions,id',
             'business_unit' => 'required|string|max:255',
             'supervisor_id' => 'nullable|exists:employees,id',
         ]);
-
-        $employee->update($request->all());
-
+    
+        $employee->update($validated);
+    
         return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
     }
 
     public function destroy(Employee $employee)
     {
         $employee->delete();
-
-        return redirect()->route('employees.index')->with('success', 'Employee deleted successfully.');
+        return redirect()->route('employees.index')->with('success', 'Employee deleted.');
     }
 }
