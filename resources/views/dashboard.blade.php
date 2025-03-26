@@ -9,31 +9,36 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const rawNodes = @json($nodes);
+            const positions = @json($nodes);
             const nodeMap = {};
-            let rootNode = null;
+            let root = null;
 
-            rawNodes.forEach(node => {
-                nodeMap[node.id] = { ...node, children: [] };
+            // Create node objects
+            positions.forEach(pos => {
+                nodeMap[pos.id] = {
+                    text: {
+                        name: pos.name,
+                        title: pos.business_unit
+                    },
+                    HTMLclass: 'node-style',
+                    children: []
+                };
             });
 
-            rawNodes.forEach(node => {
-                if (node.parent) {
-                    nodeMap[node.parent]?.children.push(nodeMap[node.id]);
+            // Build tree structure
+            positions.forEach(pos => {
+                if (pos.parent) {
+                    nodeMap[pos.parent].children.push(nodeMap[pos.id]);
                 } else {
-                    rootNode = nodeMap[node.id];
+                    root = nodeMap[pos.id];
                 }
             });
 
             const chartConfig = {
                 chart: {
                     container: "#tree-simple",
-                    node: {
-                        collapsable: true
-                    },
-                    connectors: {
-                        type: 'step'
-                    },
+                    node: { collapsable: true },
+                    connectors: { type: 'step' },
                     animation: {
                         nodeAnimation: "easeOutBounce",
                         nodeSpeed: 700,
@@ -41,10 +46,22 @@
                         connectorsSpeed: 700
                     }
                 },
-                nodeStructure: rootNode
+                nodeStructure: root
             };
 
             new Treant(chartConfig);
         });
     </script>
+
+    <style>
+        .node-style {
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            font-weight: 500;
+            text-align: center;
+        }
+    </style>
 </x-app-layout>

@@ -2,27 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
+use App\Models\Position;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $employees = \App\Models\Employee::all();
+        $positions = Position::with('supervisor')->get();
 
         $nodes = [];
 
-        foreach ($employees as $emp) {
+        foreach ($positions as $position) {
             $nodes[] = [
-                'id' => 'node-' . $emp->id,
-                'text' => [
-                    'name' => $emp->name,
-                    'title' => $emp->position_title,
-                ],
-                'parent' => $emp->supervisor_id ? 'node-' . $emp->supervisor_id : null,
+                'id' => $position->id,
+                'name' => $position->name,
+                'business_unit' => $position->business_unit,
+                'parent' => $position->supervisor_id,
             ];
         }
 
-        return view('dashboard', ['nodes' => $nodes]);
+        return view('dashboard', compact('nodes'));
     }
 }
