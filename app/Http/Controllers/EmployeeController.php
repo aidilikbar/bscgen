@@ -60,7 +60,9 @@ class EmployeeController extends Controller
     
         $employee->update($validated);
     
-        return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
+        return redirect()
+            ->route('employees.index', ['page' => $request->get('page', 1)])
+            ->with('success', 'Employee updated successfully.');
     }
 
     public function destroy(Employee $employee)

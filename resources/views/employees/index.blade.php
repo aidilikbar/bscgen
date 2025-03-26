@@ -28,7 +28,7 @@
                             <td class="px-4 py-2">{{ $employee->supervisor?->name ?? '-' }}</td>
                             <td class="px-4 py-2 space-x-2">
                                 <a href="{{ route('employees.show', $employee) }}" class="text-indigo-600 hover:underline">Show</a>
-                                <a href="{{ route('employees.edit', $employee) }}" class="text-yellow-600 hover:underline">Edit</a>
+                                <a href="{{ route('employees.edit', ['employee' => $employee->id, 'page' => request()->get('page', 1)]) }}" class="text-yellow-600 hover:text-yellow-900">Edit</a>
                                 <form action="{{ route('employees.destroy', $employee) }}" method="POST" class="inline">
                                     @csrf @method('DELETE')
                                     <button onclick="return confirm('Are you sure?')" class="text-red-600 hover:underline">Delete</button>

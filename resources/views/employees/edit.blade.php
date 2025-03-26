@@ -5,7 +5,7 @@
 
     <div class="py-6 max-w-4xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white p-6 rounded shadow">
-            <form method="POST" action="{{ route('employees.update', $employee) }}">
+        <form action="{{ route('employees.update', ['employee' => $employee->id, 'page' => request()->get('page', 1)]) }}" method="POST">
                 @csrf
                 @method('PUT')
 
