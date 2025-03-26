@@ -8,7 +8,7 @@
     <div class="py-6">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white p-6 shadow-sm rounded-lg">
-                <form method="POST" action="{{ route('perspectives.update', $perspective) }}">
+                <form action="{{ route('perspectives.update', ['perspective' => $perspective->id, 'page' => request()->get('page', 1)]) }}" method="POST">
                     @csrf @method('PUT')
                     <div class="mb-4">
                         <label for="name" class="block font-medium text-sm text-gray-700">Name</label>

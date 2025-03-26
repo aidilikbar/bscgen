@@ -5,7 +5,7 @@
 
     <div class="py-6 max-w-5xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white p-6 shadow-sm rounded-lg">
-            <form method="POST" action="{{ route('scorecards.update', $scorecard) }}">
+            <form action="{{ route('scorecards.update', ['scorecard' => $scorecard->id, 'page' => request()->get('page', 1)]) }}" method="POST">
                 @csrf @method('PUT')
 
                 <div class="mb-4">

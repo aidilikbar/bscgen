@@ -34,7 +34,7 @@
                             <td class="px-6 py-4">{{ $objective->description }}</td>
                             <td class="px-6 py-4 text-right space-x-2">
                                 <a href="{{ route('objectives.show', $objective) }}" class="text-blue-600 hover:underline">View</a>
-                                <a href="{{ route('objectives.edit', $objective) }}" class="text-yellow-600 hover:underline mr-2">Edit</a>
+                                <a href="{{ route('objectives.edit', ['objective' => $objective->id, 'page' => request()->get('page', 1)]) }}" class="text-yellow-600 hover:text-yellow-900">Edit</a>
                                 <form action="{{ route('objectives.destroy', $objective) }}" method="POST" class="inline-block">
                                     @csrf @method('DELETE')
                                     <button onclick="return confirm('Are you sure?')" class="text-red-600 hover:underline">Delete</button>

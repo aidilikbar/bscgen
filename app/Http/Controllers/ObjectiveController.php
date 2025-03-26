@@ -52,8 +52,10 @@ class ObjectiveController extends Controller
         ]);
 
         $objective->update($request->only('perspective_id', 'description'));
-
-        return redirect()->route('objectives.index')->with('success', 'Objective updated successfully.');
+        
+        return redirect()
+        ->route('objectives.index', ['page' => $request->get('page', 1)])
+        ->with('success', 'Objective updated successfully.');
     }
 
     public function destroy(Objective $objective)

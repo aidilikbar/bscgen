@@ -34,7 +34,7 @@
                             <td class="px-6 py-4">{{ $kpi->description }}</td>
                             <td class="px-6 py-4 text-right space-x-2">
                                 <a href="{{ route('kpis.show', $kpi) }}" class="text-blue-600 hover:underline">View</a>
-                                <a href="{{ route('kpis.edit', $kpi) }}" class="text-yellow-600 hover:underline mr-2">Edit</a>
+                                <a href="{{ route('kpis.edit', ['kpi' => $kpi->id, 'page' => request()->get('page', 1)]) }}" class="text-yellow-600 hover:text-yellow-900">Edit</a>
                                 <form action="{{ route('kpis.destroy', $kpi) }}" method="POST" class="inline-block">
                                     @csrf @method('DELETE')
                                     <button onclick="return confirm('Are you sure?')" class="text-red-600 hover:underline">Delete</button>

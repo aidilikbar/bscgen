@@ -48,7 +48,9 @@ class PerspectiveController extends Controller
 
         $perspective->update($request->only('name'));
 
-        return redirect()->route('perspectives.index')->with('success', 'Perspective updated successfully.');
+        return redirect()
+        ->route('perspectives.index', ['page' => $request->get('page', 1)])
+        ->with('success', 'Perspective updated successfully.');
     }
 
     public function destroy(Perspective $perspective)

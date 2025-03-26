@@ -54,7 +54,9 @@ class PositionController extends Controller
 
         $position->update($request->all());
 
-        return redirect()->route('positions.index')->with('success', 'Position updated successfully.');
+        return redirect()
+        ->route('positions.index', ['page' => $request->get('page', 1)])
+        ->with('success', 'Position updated successfully.');
     }
 
     public function destroy(Position $position)

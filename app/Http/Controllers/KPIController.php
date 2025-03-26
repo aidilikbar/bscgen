@@ -52,7 +52,9 @@ class KPIController extends Controller
 
         $kpi->update($request->only('perspective_id', 'description'));
 
-        return redirect()->route('kpis.index')->with('success', 'KPI updated successfully.');
+        return redirect()
+        ->route('kpis.index', ['page' => $request->get('page', 1)])
+        ->with('success', 'KPI updated successfully.');
     }
 
     public function destroy(KPI $kpi)

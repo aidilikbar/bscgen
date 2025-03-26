@@ -80,7 +80,9 @@ class ScorecardController extends Controller
             $scorecard->details()->create($detail);
         }
 
-        return redirect()->route('scorecards.index')->with('success', 'Scorecard updated successfully.');
+        return redirect()
+        ->route('scorecards.index', ['page' => $request->get('page', 1)])
+        ->with('success', 'Scorecard updated successfully.');
     }
 
     public function destroy(Scorecard $scorecard)
