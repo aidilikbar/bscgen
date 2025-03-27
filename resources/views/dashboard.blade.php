@@ -4,7 +4,7 @@
     </x-slot>
 
     <div class="py-6 max-w-7xl mx-auto">
-        <div id="tree-simple" class="Treant"></div>
+        <div id="tree-container" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
     </div>
 
     <script>
@@ -25,7 +25,7 @@
                 };
             });
 
-            // Build tree structure
+            // Build hierarchy and detect roots
             positions.forEach(pos => {
                 if (pos.parent) {
                     nodeMap[pos.parent]?.children.push(nodeMap[pos.id]);
@@ -34,32 +34,32 @@
                 }
             });
 
-            // Create virtual root node if multiple roots exist
-            const finalTree =
-                rootNodes.length === 1
-                    ? rootNodes[0]
-                    : {
-                        text: { name: 'All Divisions', title: 'Top Level' },
-                        HTMLclass: 'node-style',
-                        children: rootNodes
-                    };
+            // Render each root as a separate tree
+            const treeContainer = document.getElementById('tree-container');
+            rootNodes.forEach((rootNode, index) => {
+                const treeId = `tree-${index}`;
+                const treeDiv = document.createElement('div');
+                treeDiv.id = treeId;
+                treeDiv.classList.add('Treant'); // Required class
+                treeContainer.appendChild(treeDiv);
 
-            const chartConfig = {
-                chart: {
-                    container: "#tree-simple",
-                    node: { collapsable: true },
-                    connectors: { type: 'step' },
-                    animation: {
-                        nodeAnimation: "easeOutBounce",
-                        nodeSpeed: 700,
-                        connectorsAnimation: "bounce",
-                        connectorsSpeed: 700
-                    }
-                },
-                nodeStructure: finalTree
-            };
+                const chartConfig = {
+                    chart: {
+                        container: `#${treeId}`,
+                        node: { collapsable: true },
+                        connectors: { type: 'step' },
+                        animation: {
+                            nodeAnimation: "easeOutBounce",
+                            nodeSpeed: 700,
+                            connectorsAnimation: "bounce",
+                            connectorsSpeed: 700
+                        }
+                    },
+                    nodeStructure: rootNode
+                };
 
-            new Treant(chartConfig);
+                new Treant(chartConfig);
+            });
         });
     </script>
 
@@ -72,6 +72,10 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.05);
             font-weight: 500;
             text-align: center;
+        }
+
+        #tree-container > div {
+            overflow-x: auto;
         }
     </style>
 </x-app-layout>
