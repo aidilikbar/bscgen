@@ -11,9 +11,9 @@
         document.addEventListener('DOMContentLoaded', function () {
             const positions = @json($nodes);
             const nodeMap = {};
-            let root = null;
+            const rootNodes = [];
 
-            // Create node objects
+            // Build node map
             positions.forEach(pos => {
                 nodeMap[pos.id] = {
                     text: {
@@ -28,11 +28,21 @@
             // Build tree structure
             positions.forEach(pos => {
                 if (pos.parent) {
-                    nodeMap[pos.parent].children.push(nodeMap[pos.id]);
+                    nodeMap[pos.parent]?.children.push(nodeMap[pos.id]);
                 } else {
-                    root = nodeMap[pos.id];
+                    rootNodes.push(nodeMap[pos.id]);
                 }
             });
+
+            // Create virtual root node if multiple roots exist
+            const finalTree =
+                rootNodes.length === 1
+                    ? rootNodes[0]
+                    : {
+                        text: { name: 'All Divisions', title: 'Top Level' },
+                        HTMLclass: 'node-style',
+                        children: rootNodes
+                    };
 
             const chartConfig = {
                 chart: {
@@ -46,7 +56,7 @@
                         connectorsSpeed: 700
                     }
                 },
-                nodeStructure: root
+                nodeStructure: finalTree
             };
 
             new Treant(chartConfig);
