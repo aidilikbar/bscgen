@@ -4,7 +4,7 @@
     </x-slot>
 
     <div class="py-6 max-w-7xl mx-auto">
-        <div id="tree-container" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+        <div id="tree-container" class="flex flex-wrap justify-start gap-8 px-6 pb-6"></div>
     </div>
 
     <script>
@@ -40,7 +40,10 @@
                 const treeId = `tree-${index}`;
                 const treeDiv = document.createElement('div');
                 treeDiv.id = treeId;
-                treeDiv.classList.add('Treant'); // Required class
+                treeDiv.classList.add('Treant');
+                treeDiv.classList.add('w-full', 'md:w-auto', 'overflow-x-auto', 'bg-white', 'p-4', 'rounded', 'shadow');
+                treeDiv.style.minWidth = '300px'; // Set a reasonable minimum
+                treeDiv.style.flex = '1 1 45%';   // Flex-grow and flex-basis
                 treeContainer.appendChild(treeDiv);
 
                 const chartConfig = {
@@ -69,13 +72,17 @@
             background-color: white;
             border: 1px solid #cbd5e0;
             border-radius: 6px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            font-weight: 500;
             text-align: center;
+            font-weight: 500;
+            word-break: break-word;
         }
 
         #tree-container > div {
-            overflow-x: auto;
+            max-width: 100%;
+        }
+
+        .Treant {
+            min-width: 300px;
         }
     </style>
 </x-app-layout>
