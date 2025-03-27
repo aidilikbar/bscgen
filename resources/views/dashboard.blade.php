@@ -41,9 +41,9 @@
                 const treeDiv = document.createElement('div');
                 treeDiv.id = treeId;
                 treeDiv.classList.add('Treant');
-                treeDiv.classList.add('w-full', 'md:w-auto', 'overflow-x-auto', 'bg-white', 'p-4', 'rounded', 'shadow');
-                treeDiv.style.minWidth = '300px'; // Set a reasonable minimum
-                treeDiv.style.flex = '1 1 45%';   // Flex-grow and flex-basis
+                treeDiv.classList.add('w-full', 'md:w-auto', 'overflow-x-auto');
+                treeDiv.style.minWidth = '300px';
+                treeDiv.style.flex = '1 1 45%';
                 treeContainer.appendChild(treeDiv);
 
                 const chartConfig = {
