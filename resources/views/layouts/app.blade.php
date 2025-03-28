@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/treant-js/1.0/vendor/perfect-scrollbar.min.css" />
 
         <!-- Fontawesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-mOgCyUbgkHrGeBSSZCdWT1YuWx2LBfmrNHmspA5nN5/2I5GPVL+dxtJr52tYtO03qMb7rfz8zpdc5wZKX+BxRg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
         <!-- Favicons -->
         <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/bscgen-logo.png') }}">

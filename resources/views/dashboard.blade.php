@@ -13,7 +13,6 @@
             const nodeMap = {};
             const rootNodes = [];
 
-            // Build node map
             positions.forEach(pos => {
                 nodeMap[pos.id] = {
                     text: {
@@ -25,7 +24,6 @@
                 };
             });
 
-            // Build hierarchy and detect roots
             positions.forEach(pos => {
                 if (pos.parent) {
                     nodeMap[pos.parent]?.children.push(nodeMap[pos.id]);
@@ -34,60 +32,60 @@
                 }
             });
 
-            // Render each root as a separate tree
             const treeContainer = document.getElementById('tree-container');
             rootNodes.forEach((rootNode, index) => {
                 const treeId = `tree-${index}`;
                 const treeDiv = document.createElement('div');
                 treeDiv.id = treeId;
-                treeDiv.classList.add('Treant');
-                treeDiv.classList.add('w-full', 'md:w-auto', 'overflow-x-auto');
-                treeDiv.style.minWidth = '300px';
-                treeDiv.style.flex = '1 1 45%';
+                treeDiv.classList.add('flex-grow');
+
                 treeContainer.appendChild(treeDiv);
 
-                const chartConfig = {
+                new Treant({
                     chart: {
                         container: `#${treeId}`,
-                        node: { collapsable: true },
-                        connectors: { type: 'step' },
+                        node: {
+                            collapsable: true
+                        },
                         animation: {
                             nodeAnimation: "easeOutBounce",
                             nodeSpeed: 700,
                             connectorsAnimation: "bounce",
                             connectorsSpeed: 700
+                        },
+                        callback: {
+                            onToggleCollapseFinished: function(node) {
+                                const el = node.DOM.collapseToggle;
+                                if (el) {
+                                    el.innerHTML = node.collapsed ? '<i class="fas fa-plus-circle text-gray-700"></i>' : '<i class="fas fa-minus-circle text-gray-700"></i>';
+                                }
+                            }
                         }
                     },
                     nodeStructure: rootNode
-                };
-
-                new Treant(chartConfig);
+                });
             });
         });
     </script>
 
     <style>
-        .node.collapsed::after,
-        .node.expanded::after {
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            font-size: 14px;
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: white;
-            border: 1px solid #ccc;
-            border-radius: 50%;
-            padding: 2px 5px;
+        .Treant > .node {
+            padding: 4px 8px;
+        }
+        .Treant > .node .collapse-switch {
+            right: -14px !important;
+            top: 10px !important;
+            width: 24px;
+            height: 24px;
+            background: none !important;
+            border: none;
+        }
+        .Treant > .node .collapse-switch i {
+            font-size: 20px;
             cursor: pointer;
         }
-
-        .node.collapsed::after {
-            content: '\f067'; /* plus icon */
-        }
-
-        .node.expanded::after {
-            content: '\f068'; /* minus icon */
+        .Treant > .node .collapse-switch::before {
+            display: none;
         }
     </style>
 </x-app-layout>
