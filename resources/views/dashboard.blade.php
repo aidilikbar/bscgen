@@ -67,22 +67,27 @@
     </script>
 
     <style>
-        .node-style {
-            padding: 10px;
-            background-color: white;
-            border: 1px solid #cbd5e0;
-            border-radius: 6px;
-            text-align: center;
-            font-weight: 500;
-            word-break: break-word;
+        .node.collapsed::after,
+        .node.expanded::after {
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 14px;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            padding: 2px 5px;
+            cursor: pointer;
         }
 
-        #tree-container > div {
-            max-width: 100%;
+        .node.collapsed::after {
+            content: '\f067'; /* plus icon */
         }
 
-        .Treant {
-            min-width: 300px;
+        .node.expanded::after {
+            content: '\f068'; /* minus icon */
         }
     </style>
 </x-app-layout>
